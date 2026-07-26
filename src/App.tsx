@@ -1,91 +1,9 @@
 import { useRef, useState } from 'react'
 import type { FormEvent } from 'react'
 import { motion, useScroll, useTransform } from 'framer-motion'
+import { useLanguage } from './i18n/LanguageContext'
+import type { Lang } from './i18n/translations'
 import './App.css'
-
-const sets = [
-  {
-    title: 'Noche Caliente',
-    detail: 'Club set — bachata, salsa & Latin peak-time',
-    tag: 'Club',
-    href: 'https://soundcloud.com',
-  },
-  {
-    title: 'Cumbia Forever',
-    detail: 'Private party sampler — dancefloor first',
-    tag: 'Private',
-    href: 'https://soundcloud.com',
-  },
-  {
-    title: 'Bachata Smooth',
-    detail: 'Wedding & dinner-to-dance warm-up',
-    tag: 'Wedding',
-    href: 'https://soundcloud.com',
-  },
-  {
-    title: 'Salsa After Dark',
-    detail: 'Live Latin night exclusive mix',
-    tag: 'Radio',
-    href: 'https://soundcloud.com',
-  },
-]
-
-const packages = [
-  {
-    name: 'Club Set',
-    price: 'From $800',
-    detail: '60–120 minutes of bachata, salsa, cumbia, and Latin heat for rooms that stay late.',
-    includes: ['USB / CDJ ready', 'Travel in Houston metro', 'EPK & tech rider'],
-  },
-  {
-    name: 'Private Party',
-    price: 'From $1,200',
-    detail: 'Four-hour coverage for birthdays, quinceañeras, and backyard Latin nights.',
-    includes: ['Playlist collab', 'Wireless mic option', 'Setup & teardown'],
-  },
-  {
-    name: 'Wedding / Corporate',
-    price: 'From $1,800',
-    detail: 'Ceremony-to-reception or brand-night programming with a clean timeline.',
-    includes: ['Timeline planning', 'MC optional', 'Backup laptop + controller'],
-  },
-]
-
-const dates = [
-  {
-    when: 'Aug 08',
-    venue: 'Stereo Live',
-    detail: 'Latin night guest set',
-    city: 'Houston',
-  },
-  {
-    when: 'Aug 22',
-    venue: 'Warehouse Live',
-    detail: 'Salsa & bachata takeover',
-    city: 'Houston',
-  },
-  {
-    when: 'Sep 12',
-    venue: 'Private estate',
-    detail: 'Quinceañera open-to-close',
-    city: 'Sugar Land',
-  },
-]
-
-const quotes = [
-  {
-    text: 'Switched from salsa to cumbia without losing a single couple on the floor.',
-    by: 'Maya R. — Venue manager, Houston',
-  },
-  {
-    text: 'Our wedding went from dinner to a full Latin dancefloor in one blend.',
-    by: 'Elena & Carlos — Private event',
-  },
-  {
-    text: 'Knew every request — bachata, salsa, even the deep cuts our parents wanted.',
-    by: 'Ana P. — Quinceañera planner',
-  },
-]
 
 const gallery = [
   'https://images.unsplash.com/photo-1571266028247-e67365574487?auto=format&fit=crop&w=1600&q=80',
@@ -93,37 +11,6 @@ const gallery = [
   'https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?auto=format&fit=crop&w=1200&q=80',
   'https://images.unsplash.com/photo-1470225620780-dba8ba36b745?auto=format&fit=crop&w=1200&q=80',
   'https://images.unsplash.com/photo-1429962714451-bb934ecdc4ec?auto=format&fit=crop&w=1200&q=80',
-]
-
-const faqs = [
-  {
-    q: 'How far in advance should we book?',
-    a: 'Club and private dates usually lock 4–8 weeks out. Peak wedding season books further ahead — send the date early and we’ll hold a soft pencil while we quote.',
-  },
-  {
-    q: 'Do you travel outside Houston?',
-    a: 'Yes. Houston metro is included in base rates. Regional Texas and national travel is available with travel and hotel billed separately.',
-  },
-  {
-    q: 'Can guests send song requests?',
-    a: 'For private events, quinceañeras, and weddings, yes — we collect a short must-play / do-not-play list across bachata, salsa, cumbia, and more. Clubs stay curated unless the promoter asks otherwise.',
-  },
-  {
-    q: 'What styles do you play?',
-    a: 'Bachata, salsa, cumbia, merengue, reggaetón, and tropical Latin classics — mixed to read the room from abuelos to the late-night crowd.',
-  },
-  {
-    q: 'What gear do you bring?',
-    a: 'Club sets run on house CDJs when available. For private events we bring a pro controller, backup laptop, basic lighting add-ons on request, and a wireless mic if you need announcements.',
-  },
-  {
-    q: 'Are you insured?',
-    a: 'Liability coverage is available for private and corporate bookings. Ask for a certificate with your quote.',
-  },
-  {
-    q: 'What’s the deposit and cancellation policy?',
-    a: 'A 30% deposit secures the date. Cancellations 30+ days out can roll the deposit to a new date once; inside 30 days the deposit is non-refundable.',
-  },
 ]
 
 const fadeUp = {
@@ -151,13 +38,14 @@ const initialBooking: BookingState = {
   email: '',
   phone: '',
   date: '',
-  eventType: 'Private party',
+  eventType: 'private',
   city: '',
   guests: '',
   vibe: '',
 }
 
 function App() {
+  const { lang, t, setLang } = useLanguage()
   const heroRef = useRef<HTMLElement>(null)
   const { scrollYProgress } = useScroll({
     target: heroRef,
@@ -169,26 +57,33 @@ function App() {
   const [booking, setBooking] = useState<BookingState>(initialBooking)
   const [submitted, setSubmitted] = useState(false)
 
+  const epkHref = lang === 'es' ? '/dj-cowboy-epk-es.txt' : '/dj-cowboy-epk.txt'
+
   function updateField<K extends keyof BookingState>(key: K, value: BookingState[K]) {
     setBooking((prev) => ({ ...prev, [key]: value }))
   }
 
+  function eventTypeLabel(value: string) {
+    return t.book.eventTypes.find((item) => item.value === value)?.label ?? value
+  }
+
   function handleBooking(e: FormEvent<HTMLFormElement>) {
     e.preventDefault()
+    const typeLabel = eventTypeLabel(booking.eventType)
     const subject = encodeURIComponent(
-      `DJ Cowboy booking — ${booking.eventType} — ${booking.date || 'TBD'}`,
+      `${t.book.mailSubject} — ${typeLabel} — ${booking.date || 'TBD'}`,
     )
     const body = encodeURIComponent(
       [
-        `Name: ${booking.name}`,
-        `Email: ${booking.email}`,
-        `Phone: ${booking.phone || '—'}`,
-        `Event date: ${booking.date || '—'}`,
-        `Event type: ${booking.eventType}`,
-        `City / venue: ${booking.city || '—'}`,
-        `Guest count: ${booking.guests || '—'}`,
+        `${t.book.mailLabels.name}: ${booking.name}`,
+        `${t.book.mailLabels.email}: ${booking.email}`,
+        `${t.book.mailLabels.phone}: ${booking.phone || '—'}`,
+        `${t.book.mailLabels.date}: ${booking.date || '—'}`,
+        `${t.book.mailLabels.eventType}: ${typeLabel}`,
+        `${t.book.mailLabels.city}: ${booking.city || '—'}`,
+        `${t.book.mailLabels.guests}: ${booking.guests || '—'}`,
         '',
-        'Vibe / 3 songs:',
+        `${t.book.mailLabels.vibe}:`,
         booking.vibe || '—',
       ].join('\n'),
     )
@@ -196,34 +91,62 @@ function App() {
     setSubmitted(true)
   }
 
+  function switchLang(next: Lang) {
+    setLang(next)
+    setSubmitted(false)
+  }
+
   return (
-    <div className="site">
-      <nav className="nav" aria-label="Primary">
+    <div className="site" lang={lang}>
+      <nav className="nav" aria-label={t.nav.aria}>
         <a className="nav__brand" href="#top">
           DJ Cowboy
         </a>
         <ul className="nav__links">
           <li>
-            <a href="#listen">Listen</a>
+            <a href="#listen">{t.nav.listen}</a>
           </li>
           <li>
-            <a href="#services">Services</a>
+            <a href="#services">{t.nav.services}</a>
           </li>
           <li>
-            <a href="#packages">Packages</a>
+            <a href="#packages">{t.nav.packages}</a>
           </li>
           <li>
-            <a href="#about">About</a>
+            <a href="#about">{t.nav.about}</a>
           </li>
           <li>
-            <a href="#dates">Dates</a>
+            <a href="#dates">{t.nav.dates}</a>
           </li>
           <li>
-            <a href="#faq">FAQ</a>
+            <a href="#faq">{t.nav.faq}</a>
+          </li>
+          <li>
+            <div className="lang-switch" role="group" aria-label={t.lang.switchTo}>
+              <button
+                type="button"
+                className={`lang-switch__btn${lang === 'en' ? ' is-active' : ''}`}
+                onClick={() => switchLang('en')}
+                aria-pressed={lang === 'en'}
+              >
+                {t.lang.en}
+              </button>
+              <span className="lang-switch__sep" aria-hidden="true">
+                /
+              </span>
+              <button
+                type="button"
+                className={`lang-switch__btn${lang === 'es' ? ' is-active' : ''}`}
+                onClick={() => switchLang('es')}
+                aria-pressed={lang === 'es'}
+              >
+                {t.lang.es}
+              </button>
+            </div>
           </li>
           <li>
             <a className="nav__book" href="#book">
-              Book
+              {t.nav.book}
             </a>
           </li>
         </ul>
@@ -270,7 +193,7 @@ function App() {
             custom={0.4}
             variants={fadeUp}
           >
-            Bachata, salsa, cumbia — Houston’s Latin dancefloor.
+            {t.hero.headline}
           </motion.p>
           <motion.p
             className="hero__lede"
@@ -279,7 +202,7 @@ function App() {
             custom={0.5}
             variants={fadeUp}
           >
-            Clubs, weddings, quinceañeras, and private events with all Latin sounds.
+            {t.hero.lede}
           </motion.p>
           <motion.div
             className="hero__ctas"
@@ -289,25 +212,23 @@ function App() {
             variants={fadeUp}
           >
             <a className="btn btn--primary" href="#book">
-              Check availability
+              {t.hero.ctaBook}
             </a>
             <a className="btn btn--ghost" href="#listen">
-              Listen to a set
+              {t.hero.ctaListen}
             </a>
           </motion.div>
         </div>
       </header>
 
       <section className="section" id="listen">
-        <p className="section__label">Listen</p>
-        <h2 className="section__title">Hear the night</h2>
-        <p className="section__copy">
-          Club heat, wedding warm-ups, and private-party cumbia — press play before you enquire.
-        </p>
+        <p className="section__label">{t.listen.label}</p>
+        <h2 className="section__title">{t.listen.title}</h2>
+        <p className="section__copy">{t.listen.copy}</p>
         <div className="sets">
-          {sets.map((set, i) => (
+          {t.listen.sets.map((set, i) => (
             <motion.a
-              key={set.title}
+              key={`${lang}-${set.title}`}
               className="set"
               href={set.href}
               target="_blank"
@@ -334,61 +255,57 @@ function App() {
       </section>
 
       <section className="section" id="services">
-        <p className="section__label">Services</p>
-        <h2 className="section__title">Who it’s for</h2>
-        <p className="section__copy">
-          Clubs, family milestones, and brand nights — promoters get the rider, planners get the timeline.
-        </p>
+        <p className="section__label">{t.services.label}</p>
+        <h2 className="section__title">{t.services.title}</h2>
+        <p className="section__copy">{t.services.copy}</p>
         <div className="services">
           <article className="service">
-            <h3>Clubs</h3>
-            <p>60–120 minute Latin sets — bachata, salsa, cumbia, and tropical heat for rooms that run late.</p>
+            <h3>{t.services.clubs.title}</h3>
+            <p>{t.services.clubs.body}</p>
             <ul>
-              <li>Houston + regional travel</li>
-              <li>CDJ / USB ready</li>
-              <li>EPK & tech rider on request</li>
+              {t.services.clubs.items.map((item) => (
+                <li key={item}>{item}</li>
+              ))}
             </ul>
-            <a className="service__link" href="/dj-cowboy-epk.txt" download>
-              Download EPK
+            <a className="service__link" href={epkHref} download>
+              {t.services.clubs.link}
             </a>
           </article>
           <article className="service">
-            <h3>Private</h3>
-            <p>Weddings, quinceañeras, and birthday nights with requests honored and the floor always full.</p>
+            <h3>{t.services.private.title}</h3>
+            <p>{t.services.private.body}</p>
             <ul>
-              <li>Must-play / do-not-play list</li>
-              <li>Optional MC + wireless mic</li>
-              <li>Houston metro base rate</li>
+              {t.services.private.items.map((item) => (
+                <li key={item}>{item}</li>
+              ))}
             </ul>
             <a className="service__link" href="#book">
-              Book a private event
+              {t.services.private.link}
             </a>
           </article>
           <article className="service">
-            <h3>Corporate</h3>
-            <p>Brand nights and company parties that stay festive without losing the Latin groove.</p>
+            <h3>{t.services.corporate.title}</h3>
+            <p>{t.services.corporate.body}</p>
             <ul>
-              <li>Timeline + cue sheet</li>
-              <li>Insured bookings available</li>
-              <li>Logo / visual asset handoff</li>
+              {t.services.corporate.items.map((item) => (
+                <li key={item}>{item}</li>
+              ))}
             </ul>
             <a className="service__link" href="#book">
-              Request a quote
+              {t.services.corporate.link}
             </a>
           </article>
         </div>
       </section>
 
       <section className="section" id="packages">
-        <p className="section__label">Packages</p>
-        <h2 className="section__title">Starting rates</h2>
-        <p className="section__copy">
-          Transparent bands so you can self-qualify before we hop on a call. Final quotes depend on date, hours, and travel.
-        </p>
+        <p className="section__label">{t.packages.label}</p>
+        <h2 className="section__title">{t.packages.title}</h2>
+        <p className="section__copy">{t.packages.copy}</p>
         <div className="packages">
-          {packages.map((pkg, i) => (
+          {t.packages.items.map((pkg, i) => (
             <motion.article
-              key={pkg.name}
+              key={`${lang}-${pkg.name}`}
               className="package"
               initial="hidden"
               whileInView="show"
@@ -414,37 +331,31 @@ function App() {
       <section className="section section--wide" id="about">
         <div className="about">
           <div className="about__text">
-            <p className="section__label">About</p>
-            <h2 className="section__title">Houston heat. Latin forever.</h2>
-            <p className="section__copy section__copy--tight">
-              DJ Cowboy lives in the Latin catalog — bachata that slows the room down, salsa that snaps it back, cumbias that refuse to end, plus merengue, reggaetón, and the classics every tío requests.
-            </p>
-            <p className="section__copy">
-              From Houston club nights to quinceañeras and weddings across the metro, the brief is the same: keep every generation dancing, honor the requests, and leave the timeline tighter than you found it.
-            </p>
+            <p className="section__label">{t.about.label}</p>
+            <h2 className="section__title">{t.about.title}</h2>
+            <p className="section__copy section__copy--tight">{t.about.p1}</p>
+            <p className="section__copy">{t.about.p2}</p>
             <div className="about__actions">
-              <a className="btn btn--ink" href="/dj-cowboy-epk.txt" download>
-                Download EPK
+              <a className="btn btn--ink" href={epkHref} download>
+                {t.about.epk}
               </a>
               <a className="btn btn--outline-ink" href="/tech-rider.txt" download>
-                Tech rider
+                {t.about.rider}
               </a>
             </div>
           </div>
           <img
             className="about__photo"
             src="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?auto=format&fit=crop&w=1400&q=80"
-            alt="DJ performing behind the decks"
+            alt={t.about.photoAlt}
           />
         </div>
       </section>
 
       <section className="section section--wide" id="gallery">
-        <p className="section__label">Gallery</p>
-        <h2 className="section__title">The floor, the booth</h2>
-        <p className="section__copy">
-          Crowd energy, booth presence, and private-event polish — real nights, not stock filler.
-        </p>
+        <p className="section__label">{t.gallery.label}</p>
+        <h2 className="section__title">{t.gallery.title}</h2>
+        <p className="section__copy">{t.gallery.copy}</p>
         <div className="gallery">
           {gallery.map((src, i) => (
             <figure key={src}>
@@ -455,15 +366,13 @@ function App() {
       </section>
 
       <section className="section" id="dates">
-        <p className="section__label">Dates</p>
-        <h2 className="section__title">On the road</h2>
-        <p className="section__copy">
-          Public nights when they’re on the books. Private dates stay off the grid — enquire to hold yours.
-        </p>
+        <p className="section__label">{t.dates.label}</p>
+        <h2 className="section__title">{t.dates.title}</h2>
+        <p className="section__copy">{t.dates.copy}</p>
         <div className="dates">
-          {dates.map((date, i) => (
+          {t.dates.items.map((date, i) => (
             <motion.article
-              key={`${date.venue}-${date.when}`}
+              key={`${lang}-${date.venue}-${date.when}`}
               className="date"
               initial="hidden"
               whileInView="show"
@@ -483,15 +392,13 @@ function App() {
       </section>
 
       <section className="section" id="proof">
-        <p className="section__label">Proof</p>
-        <h2 className="section__title">What they say</h2>
-        <p className="section__copy">
-          Venue managers, couples, and producers — specific nights, not vague praise.
-        </p>
+        <p className="section__label">{t.proof.label}</p>
+        <h2 className="section__title">{t.proof.title}</h2>
+        <p className="section__copy">{t.proof.copy}</p>
         <div className="proof">
-          {quotes.map((quote, i) => (
+          {t.proof.quotes.map((quote, i) => (
             <motion.article
-              key={quote.by}
+              key={`${lang}-${quote.by}`}
               className="quote"
               initial="hidden"
               whileInView="show"
@@ -504,48 +411,35 @@ function App() {
             </motion.article>
           ))}
         </div>
-        <ul className="venues" aria-label="Selected rooms">
-          <li>Stereo Live</li>
-          <li>Warehouse Live</li>
-          <li>Houston Latin nights</li>
-          <li>Private estates · TX</li>
+        <ul className="venues" aria-label={t.proof.venuesLabel}>
+          {t.proof.venues.map((venue) => (
+            <li key={venue}>{venue}</li>
+          ))}
         </ul>
       </section>
 
       <section className="section" id="process">
-        <p className="section__label">Process</p>
-        <h2 className="section__title">How booking works</h2>
-        <p className="section__copy">
-          Three steps from first note to deposit — no mystery, no runaway email chains.
-        </p>
+        <p className="section__label">{t.process.label}</p>
+        <h2 className="section__title">{t.process.title}</h2>
+        <p className="section__copy">{t.process.copy}</p>
         <div className="process">
-          <article className="step">
-            <div className="step__num">01</div>
-            <h3>Enquire</h3>
-            <p>Send the date, event type, and city. We reply within 24 hours.</p>
-          </article>
-          <article className="step">
-            <div className="step__num">02</div>
-            <h3>Plan</h3>
-            <p>Quick call or email thread on timeline, vibe, and gear.</p>
-          </article>
-          <article className="step">
-            <div className="step__num">03</div>
-            <h3>Confirm</h3>
-            <p>Deposit + contract locks the night. Rider and playlist follow.</p>
-          </article>
+          {t.process.steps.map((step, i) => (
+            <article className="step" key={step.title}>
+              <div className="step__num">{String(i + 1).padStart(2, '0')}</div>
+              <h3>{step.title}</h3>
+              <p>{step.body}</p>
+            </article>
+          ))}
         </div>
       </section>
 
       <section className="section" id="faq">
-        <p className="section__label">FAQ</p>
-        <h2 className="section__title">Before you book</h2>
-        <p className="section__copy">
-          Promoters and planners ask the same handful of questions — answers up front.
-        </p>
+        <p className="section__label">{t.faq.label}</p>
+        <h2 className="section__title">{t.faq.title}</h2>
+        <p className="section__copy">{t.faq.copy}</p>
         <div className="faq">
-          {faqs.map((item) => (
-            <details key={item.q}>
+          {t.faq.items.map((item) => (
+            <details key={`${lang}-${item.q}`}>
               <summary>{item.q}</summary>
               <p>{item.a}</p>
             </details>
@@ -556,36 +450,31 @@ function App() {
       <section className="booking" id="book">
         <div className="booking__inner">
           <div>
-            <h2 className="booking__title">Check availability</h2>
-            <p className="booking__copy">
-              Tell us the date and the shape of the night. We’ll send a quote and next steps within 24 hours.
-            </p>
+            <h2 className="booking__title">{t.book.title}</h2>
+            <p className="booking__copy">{t.book.copy}</p>
             <div className="booking__trust">
-              <p>
-                <span>→</span> Replies within 24 hours
-              </p>
-              <p>
-                <span>→</span> 30% deposit to hold the date
-              </p>
-              <p>
-                <span>→</span> Insured private & corporate bookings
-              </p>
+              {t.book.trust.map((line) => (
+                <p key={line}>
+                  <span>→</span> {line}
+                </p>
+              ))}
             </div>
           </div>
 
           {submitted ? (
             <div className="form__success">
-              <h3>Request ready</h3>
+              <h3>{t.book.successTitle}</h3>
               <p>
-                Your mail app should open with the details filled in. If it doesn’t, email{' '}
-                <a href="mailto:bookings@djcowboy.com">bookings@djcowboy.com</a> directly.
+                {t.book.successBody}{' '}
+                <a href="mailto:bookings@djcowboy.com">bookings@djcowboy.com</a>{' '}
+                {t.book.successBodyAfter}
               </p>
             </div>
           ) : (
             <form className="form" onSubmit={handleBooking}>
               <div className="form__row">
                 <label>
-                  Name
+                  {t.book.name}
                   <input
                     required
                     name="name"
@@ -595,7 +484,7 @@ function App() {
                   />
                 </label>
                 <label>
-                  Email
+                  {t.book.email}
                   <input
                     required
                     type="email"
@@ -608,7 +497,7 @@ function App() {
               </div>
               <div className="form__row">
                 <label>
-                  Phone
+                  {t.book.phone}
                   <input
                     type="tel"
                     name="phone"
@@ -618,7 +507,7 @@ function App() {
                   />
                 </label>
                 <label>
-                  Event date
+                  {t.book.date}
                   <input
                     required
                     type="date"
@@ -630,60 +519,61 @@ function App() {
               </div>
               <div className="form__row">
                 <label>
-                  Event type
+                  {t.book.eventType}
                   <select
                     name="eventType"
                     value={booking.eventType}
                     onChange={(e) => updateField('eventType', e.target.value)}
                   >
-                    <option>Club</option>
-                    <option>Wedding</option>
-                    <option>Quinceañera</option>
-                    <option>Corporate</option>
-                    <option>Private party</option>
-                    <option>Other</option>
+                    {t.book.eventTypes.map((option) => (
+                      <option key={option.value} value={option.value}>
+                        {option.label}
+                      </option>
+                    ))}
                   </select>
                 </label>
                 <label>
-                  Guest count
+                  {t.book.guests}
                   <input
                     name="guests"
                     inputMode="numeric"
-                    placeholder="e.g. 120"
+                    placeholder={t.book.guestsPlaceholder}
                     value={booking.guests}
                     onChange={(e) => updateField('guests', e.target.value)}
                   />
                 </label>
               </div>
               <label>
-                City / venue
+                {t.book.city}
                 <input
                   name="city"
-                  placeholder="Houston, Stereo Live, etc."
+                  placeholder={t.book.cityPlaceholder}
                   value={booking.city}
                   onChange={(e) => updateField('city', e.target.value)}
                 />
               </label>
               <label>
-                Vibe — 3 songs that define the night
+                {t.book.vibe}
                 <textarea
                   name="vibe"
-                  placeholder="Bachata, salsa, cumbia — artists or tracks that set the tone"
+                  placeholder={t.book.vibePlaceholder}
                   value={booking.vibe}
                   onChange={(e) => updateField('vibe', e.target.value)}
                 />
               </label>
               <button className="btn btn--primary form__submit" type="submit">
-                Request a quote
+                {t.book.submit}
               </button>
-              <p className="form__note">Opens your email with the enquiry ready to send.</p>
+              <p className="form__note">{t.book.note}</p>
             </form>
           )}
         </div>
       </section>
 
       <footer className="footer">
-        <p>© {new Date().getFullYear()} DJ Cowboy · Houston, TX</p>
+        <p>
+          © {new Date().getFullYear()} {t.footer.rights}
+        </p>
         <ul className="footer__socials">
           <li>
             <a href="https://soundcloud.com" target="_blank" rel="noreferrer">
@@ -701,13 +591,13 @@ function App() {
             </a>
           </li>
           <li>
-            <a href="/dj-cowboy-epk.txt" download>
+            <a href={epkHref} download>
               EPK
             </a>
           </li>
           <li>
             <a href="/tech-rider.txt" download>
-              Rider
+              {t.footer.rider}
             </a>
           </li>
         </ul>
@@ -715,7 +605,7 @@ function App() {
 
       <div className="mobile-bar">
         <a className="btn btn--primary" href="#book">
-          Check availability
+          {t.mobileBar}
         </a>
       </div>
     </div>

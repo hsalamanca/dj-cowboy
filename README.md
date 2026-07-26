@@ -4,6 +4,7 @@ Houston-based Latin DJ site — bachata, salsa, cumbia, and all Latin sounds for
 
 - **Live:** https://dj-cowboy.vercel.app
 - **GitHub:** https://github.com/hsalamanca/dj-cowboy
+- **Languages:** English / Español (toggle in nav; remembers preference)
 
 ## What’s on the site
 
@@ -11,7 +12,7 @@ Houston-based Latin DJ site — bachata, salsa, cumbia, and all Latin sounds for
 - Listen (sets by context)
 - Services split (Clubs / Private / Corporate)
 - Packages with starting rates
-- About + EPK / tech rider downloads
+- About + EPK / tech rider downloads (EN + ES EPK)
 - Gallery, dates, testimonials
 - Booking process + FAQ
 - Enquiry form (mailto quote request)
