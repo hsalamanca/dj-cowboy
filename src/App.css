@@ -106,12 +106,23 @@
 .hero__brand {
   font-family: var(--font-display);
   font-weight: 800;
-  font-size: clamp(4.5rem, 18vw, 12rem);
-  line-height: 0.85;
-  letter-spacing: -0.04em;
+  /* Scale to one line on narrow phones — "COWBOY" needs a lower floor than shorter names */
+  font-size: clamp(2.75rem, 14.5vw, 12rem);
+  line-height: 0.9;
+  letter-spacing: -0.055em;
   text-transform: uppercase;
   color: var(--ink);
   text-shadow: 0 0 80px var(--glow);
+  white-space: nowrap;
+  max-width: 100%;
+  overflow: visible;
+}
+
+@media (max-width: 380px) {
+  .hero__brand {
+    font-size: clamp(2.5rem, 13.5vw, 12rem);
+    letter-spacing: -0.06em;
+  }
 }
 
 .hero__headline {
