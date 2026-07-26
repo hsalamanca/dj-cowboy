@@ -1,12 +1,12 @@
 :root {
-  --bg: #0b0c0e;
-  --bg-elevated: #121418;
-  --ink: #f3f1ea;
-  --muted: #9a968c;
-  --accent: #d6ff4b;
-  --accent-ink: #0b0c0e;
-  --line: rgba(243, 241, 234, 0.12);
-  --glow: rgba(214, 255, 75, 0.18);
+  --bg: #100e0c;
+  --bg-elevated: #1a1612;
+  --ink: #f5f0e6;
+  --muted: #a39a8a;
+  --accent: #e8c547;
+  --accent-ink: #100e0c;
+  --line: rgba(245, 240, 230, 0.12);
+  --glow: rgba(232, 197, 71, 0.2);
   --font-display: "Syne", sans-serif;
   --font-body: "Outfit", sans-serif;
   --space: clamp(1.25rem, 4vw, 2.5rem);

@@ -1,8 +1,8 @@
 {
-  "name": "dj-ticho",
+  "name": "dj-cowboy",
   "private": true,
   "version": "1.0.0",
-  "description": "DJ Ticho — portfolio site",
+  "description": "DJ Cowboy — portfolio site",
   "type": "module",
   "scripts": {
     "dev": "vite",

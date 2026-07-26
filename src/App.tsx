@@ -4,17 +4,17 @@ import './App.css'
 
 const sets = [
   {
-    title: 'Pressure Room 04',
-    detail: 'Live at Warehouse District — Berlin',
+    title: 'Dust & Neon',
+    detail: 'Live at The Saloon — Austin',
     time: '72:18',
   },
   {
-    title: 'Night Shift',
+    title: 'Open Range',
     detail: 'Boiler Room guest mix',
     time: '58:40',
   },
   {
-    title: 'Acid Line',
+    title: 'Midnight Cattle Call',
     detail: 'Resident FM exclusive',
     time: '64:05',
   },
@@ -23,19 +23,19 @@ const sets = [
 const dates = [
   {
     when: 'Aug 08',
-    venue: 'Tresor',
-    detail: 'All-night warehouse set',
-    city: 'Berlin',
+    venue: 'Stubb\'s',
+    detail: 'All-night outdoor set',
+    city: 'Austin',
   },
   {
     when: 'Aug 22',
-    venue: 'Fabric',
-    detail: 'Room Two takeover',
-    city: 'London',
+    venue: 'The Premises',
+    detail: 'Rooftop takeover',
+    city: 'Nashville',
   },
   {
     when: 'Sep 12',
-    venue: 'Nowadays',
+    venue: 'Brooklyn Mirage',
     detail: 'Open-to-close',
     city: 'New York',
   },
@@ -63,7 +63,7 @@ function App() {
     <div className="site">
       <nav className="nav" aria-label="Primary">
         <a className="nav__brand" href="#top">
-          DJ Ticho
+          DJ Cowboy
         </a>
         <ul className="nav__links">
           <li>
@@ -81,7 +81,7 @@ function App() {
       <header className="hero" id="top" ref={heroRef}>
         <div className="hero__media" aria-hidden="true">
           <motion.img
-            src="https://images.unsplash.com/photo-1571266028247-e67365574487?auto=format&fit=crop&w=2400&q=80"
+            src="https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=2400&q=80"
             alt=""
             style={{ y: imageY, scale: imageScale }}
           />
@@ -96,7 +96,7 @@ function App() {
             custom={0.05}
             variants={fadeUp}
           >
-            Ticho
+            Cowboy
           </motion.h1>
           <motion.p
             className="hero__headline"
@@ -105,7 +105,7 @@ function App() {
             custom={0.2}
             variants={fadeUp}
           >
-            Silence before the drop.
+            Outlaw hours. Open range.
           </motion.p>
           <motion.p
             className="hero__lede"
@@ -114,7 +114,7 @@ function App() {
             custom={0.32}
             variants={fadeUp}
           >
-            DJ Ticho cuts hard techno, acid, and industrial heat for rooms that stay open until morning.
+            DJ Cowboy rides bass-heavy house, dusty disco, and late-night country-club heat until the sun comes up.
           </motion.p>
           <motion.div
             className="hero__ctas"
@@ -134,7 +134,7 @@ function App() {
               Listen
             </a>
             <a className="btn btn--ghost" href="#booking">
-              Book Ticho
+              Book Cowboy
             </a>
           </motion.div>
         </div>
@@ -168,7 +168,7 @@ function App() {
           custom={0.12}
           variants={fadeUp}
         >
-          Peak-time selections built for concrete floors and long transitions.
+          Peak-time selections built for dusty floors and long transitions.
         </motion.p>
         <div className="sets">
           {sets.map((set, i) => (
@@ -221,7 +221,7 @@ function App() {
           custom={0.12}
           variants={fadeUp}
         >
-          Upcoming club nights and festival rooms.
+          Upcoming barn parties, club nights, and festival stages.
         </motion.p>
         <div className="dates">
           {dates.map((date, i) => (
@@ -269,20 +269,20 @@ function App() {
           </motion.p>
           <motion.a
             className="booking__email"
-            href="mailto:bookings@djticho.com"
+            href="mailto:bookings@djcowboy.com"
             initial="hidden"
             whileInView="show"
             viewport={{ once: true, margin: '-80px' }}
             custom={0.25}
             variants={fadeUp}
           >
-            bookings@djticho.com
+            bookings@djcowboy.com
           </motion.a>
         </div>
       </section>
 
       <footer className="footer">
-        <p>© {new Date().getFullYear()} DJ Ticho</p>
+        <p>© {new Date().getFullYear()} DJ Cowboy</p>
         <ul className="footer__socials">
           <li>
             <a href="https://soundcloud.com" target="_blank" rel="noreferrer">
