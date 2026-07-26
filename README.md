@@ -2,11 +2,15 @@
 
 Portfolio site for **DJ Cowboy**: landing page with sets, tour dates, and booking.
 
+- **Live:** https://dj-cowboy.vercel.app
+- **GitHub:** https://github.com/hsalamanca/dj-cowboy
+
 ## Stack
 
 - Vite + React + TypeScript
 - Framer Motion
 - Syne + Outfit (Google Fonts)
+- Vercel (auto-deploys from `main`)
 
 ## Develop
 
@@ -27,12 +31,3 @@ npm run preview
 - Brand copy and dates: `src/App.tsx`
 - Colors / type: CSS variables in `src/index.css`
 - Hero image: Unsplash URL in the hero `<img>` in `src/App.tsx`
-
-## Publish to GitHub
-
-This environment has no GitHub credentials. From your machine:
-
-```bash
-cd dj-site
-gh repo create dj-cowboy --public --source=. --remote=origin --push
-```
