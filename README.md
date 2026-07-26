@@ -1,6 +1,6 @@
-# KAIRO — DJ site
+# DJ Ticho
 
-Portfolio site for DJ / producer **Kairo**: landing page with sets, tour dates, and booking.
+Portfolio site for **DJ Ticho**: landing page with sets, tour dates, and booking.
 
 ## Stack
 
@@ -34,5 +34,5 @@ This environment has no GitHub credentials. From your machine:
 
 ```bash
 cd dj-site
-gh repo create kairo-dj --public --source=. --remote=origin --push
+gh repo create dj-ticho --public --source=. --remote=origin --push
 ```

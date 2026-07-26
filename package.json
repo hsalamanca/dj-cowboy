@@ -1,8 +1,8 @@
 {
-  "name": "kairo-dj",
+  "name": "dj-ticho",
   "private": true,
   "version": "1.0.0",
-  "description": "KAIRO — DJ / producer portfolio site",
+  "description": "DJ Ticho — portfolio site",
   "type": "module",
   "scripts": {
     "dev": "vite",

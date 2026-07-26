@@ -63,7 +63,7 @@ function App() {
     <div className="site">
       <nav className="nav" aria-label="Primary">
         <a className="nav__brand" href="#top">
-          Kairo
+          DJ Ticho
         </a>
         <ul className="nav__links">
           <li>
@@ -96,7 +96,7 @@ function App() {
             custom={0.05}
             variants={fadeUp}
           >
-            Kairo
+            Ticho
           </motion.h1>
           <motion.p
             className="hero__headline"
@@ -105,7 +105,7 @@ function App() {
             custom={0.2}
             variants={fadeUp}
           >
-            Late-night pressure. Warehouse pulse.
+            Silence before the drop.
           </motion.p>
           <motion.p
             className="hero__lede"
@@ -114,7 +114,7 @@ function App() {
             custom={0.32}
             variants={fadeUp}
           >
-            DJ and producer cutting hard techno, acid, and industrial heat for rooms that stay open until morning.
+            DJ Ticho cuts hard techno, acid, and industrial heat for rooms that stay open until morning.
           </motion.p>
           <motion.div
             className="hero__ctas"
@@ -134,7 +134,7 @@ function App() {
               Listen
             </a>
             <a className="btn btn--ghost" href="#booking">
-              Book Kairo
+              Book Ticho
             </a>
           </motion.div>
         </div>
@@ -269,20 +269,20 @@ function App() {
           </motion.p>
           <motion.a
             className="booking__email"
-            href="mailto:bookings@kairo.audio"
+            href="mailto:bookings@djticho.com"
             initial="hidden"
             whileInView="show"
             viewport={{ once: true, margin: '-80px' }}
             custom={0.25}
             variants={fadeUp}
           >
-            bookings@kairo.audio
+            bookings@djticho.com
           </motion.a>
         </div>
       </section>
 
       <footer className="footer">
-        <p>© {new Date().getFullYear()} Kairo</p>
+        <p>© {new Date().getFullYear()} DJ Ticho</p>
         <ul className="footer__socials">
           <li>
             <a href="https://soundcloud.com" target="_blank" rel="noreferrer">
