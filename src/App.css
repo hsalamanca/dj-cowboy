@@ -72,15 +72,15 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center 40%;
+  object-position: center 35%;
 }
 
 .hero__veil {
   position: absolute;
   inset: 0;
   background:
-    linear-gradient(180deg, rgba(20, 32, 43, 0.25) 0%, rgba(20, 32, 43, 0.1) 40%, rgba(20, 32, 43, 0.55) 68%, rgba(20, 32, 43, 0.92) 100%),
-    linear-gradient(90deg, rgba(20, 32, 43, 0.35) 0%, transparent 55%);
+    linear-gradient(180deg, rgba(20, 32, 43, 0.45) 0%, rgba(20, 32, 43, 0.2) 35%, rgba(20, 32, 43, 0.55) 65%, rgba(20, 32, 43, 0.94) 100%),
+    linear-gradient(90deg, rgba(20, 32, 43, 0.4) 0%, transparent 60%);
 }
 
 .hero__content {

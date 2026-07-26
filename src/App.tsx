@@ -81,7 +81,7 @@ function App() {
       <header className="hero" id="top" ref={heroRef}>
         <div className="hero__media" aria-hidden="true">
           <motion.img
-            src="https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?auto=format&fit=crop&w=2400&q=80"
+            src="https://images.unsplash.com/photo-1571266028247-e67365574487?auto=format&fit=crop&w=2400&q=80"
             alt=""
             style={{ y: imageY, scale: imageScale }}
           />
