@@ -1,7 +1,8 @@
 {
-  "name": "dj-site",
+  "name": "kairo-dj",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
+  "description": "KAIRO — DJ / producer portfolio site",
   "type": "module",
   "scripts": {
     "dev": "vite",
