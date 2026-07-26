@@ -5,26 +5,26 @@ import './App.css'
 
 const sets = [
   {
-    title: 'Dust & Neon',
-    detail: 'Club set — peak-time house & disco',
+    title: 'Noche Caliente',
+    detail: 'Club set — bachata, salsa & Latin peak-time',
     tag: 'Club',
     href: 'https://soundcloud.com',
   },
   {
-    title: 'Open Range',
+    title: 'Cumbia Forever',
     detail: 'Private party sampler — dancefloor first',
     tag: 'Private',
     href: 'https://soundcloud.com',
   },
   {
-    title: 'Sunset Warm-Up',
-    detail: 'Road-trip grooves for golden hour',
-    tag: 'Warm-up',
+    title: 'Bachata Smooth',
+    detail: 'Wedding & dinner-to-dance warm-up',
+    tag: 'Wedding',
     href: 'https://soundcloud.com',
   },
   {
-    title: 'Midnight Cattle Call',
-    detail: 'Resident FM exclusive',
+    title: 'Salsa After Dark',
+    detail: 'Live Latin night exclusive mix',
     tag: 'Radio',
     href: 'https://soundcloud.com',
   },
@@ -34,13 +34,13 @@ const packages = [
   {
     name: 'Club Set',
     price: 'From $800',
-    detail: '60–120 minutes of house and disco for rooms that stay late.',
-    includes: ['USB / CDJ ready', 'Travel in Austin metro', 'EPK & tech rider'],
+    detail: '60–120 minutes of bachata, salsa, cumbia, and Latin heat for rooms that stay late.',
+    includes: ['USB / CDJ ready', 'Travel in Houston metro', 'EPK & tech rider'],
   },
   {
     name: 'Private Party',
     price: 'From $1,200',
-    detail: 'Four-hour coverage for backyards, lodges, and birthday blowouts.',
+    detail: 'Four-hour coverage for birthdays, quinceañeras, and backyard Latin nights.',
     includes: ['Playlist collab', 'Wireless mic option', 'Setup & teardown'],
   },
   {
@@ -54,36 +54,36 @@ const packages = [
 const dates = [
   {
     when: 'Aug 08',
-    venue: "Stubb's",
-    detail: 'All-night outdoor set',
-    city: 'Austin',
+    venue: 'Stereo Live',
+    detail: 'Latin night guest set',
+    city: 'Houston',
   },
   {
     when: 'Aug 22',
-    venue: 'The Premises',
-    detail: 'Rooftop takeover',
-    city: 'Nashville',
+    venue: 'Warehouse Live',
+    detail: 'Salsa & bachata takeover',
+    city: 'Houston',
   },
   {
     when: 'Sep 12',
-    venue: 'Brooklyn Mirage',
-    detail: 'Open-to-close',
-    city: 'New York',
+    venue: 'Private estate',
+    detail: 'Quinceañera open-to-close',
+    city: 'Sugar Land',
   },
 ]
 
 const quotes = [
   {
-    text: 'Read the room like a pro — floor never dropped under 90%.',
-    by: 'Maya R. — Venue manager, Austin',
+    text: 'Switched from salsa to cumbia without losing a single couple on the floor.',
+    by: 'Maya R. — Venue manager, Houston',
   },
   {
-    text: 'Our wedding went from dinner chatter to a full stampede in one blend.',
-    by: 'Elena & Josh — Private event',
+    text: 'Our wedding went from dinner to a full Latin dancefloor in one blend.',
+    by: 'Elena & Carlos — Private event',
   },
   {
-    text: 'Showed up with the rider locked and a set that made the brand night feel illegal in the best way.',
-    by: 'Chris P. — Corporate producer',
+    text: 'Knew every request — bachata, salsa, even the deep cuts our parents wanted.',
+    by: 'Ana P. — Quinceañera planner',
   },
 ]
 
@@ -101,12 +101,16 @@ const faqs = [
     a: 'Club and private dates usually lock 4–8 weeks out. Peak wedding season books further ahead — send the date early and we’ll hold a soft pencil while we quote.',
   },
   {
-    q: 'Do you travel outside Austin?',
-    a: 'Yes. Austin metro is included in base rates. Regional and national travel is available with travel and hotel billed separately.',
+    q: 'Do you travel outside Houston?',
+    a: 'Yes. Houston metro is included in base rates. Regional Texas and national travel is available with travel and hotel billed separately.',
   },
   {
     q: 'Can guests send song requests?',
-    a: 'For private events and weddings, yes — we collect a short must-play / do-not-play list. Clubs stay curated unless the promoter asks otherwise.',
+    a: 'For private events, quinceañeras, and weddings, yes — we collect a short must-play / do-not-play list across bachata, salsa, cumbia, and more. Clubs stay curated unless the promoter asks otherwise.',
+  },
+  {
+    q: 'What styles do you play?',
+    a: 'Bachata, salsa, cumbia, merengue, reggaetón, and tropical Latin classics — mixed to read the room from abuelos to the late-night crowd.',
   },
   {
     q: 'What gear do you bring?',
@@ -266,7 +270,7 @@ function App() {
             custom={0.4}
             variants={fadeUp}
           >
-            House, disco & road-trip grooves — Austin and beyond.
+            Bachata, salsa, cumbia — Houston’s Latin dancefloor.
           </motion.p>
           <motion.p
             className="hero__lede"
@@ -275,7 +279,7 @@ function App() {
             custom={0.5}
             variants={fadeUp}
           >
-            Clubs, weddings, and private events with dancefloor-first programming.
+            Clubs, weddings, quinceañeras, and private events with all Latin sounds.
           </motion.p>
           <motion.div
             className="hero__ctas"
@@ -298,7 +302,7 @@ function App() {
         <p className="section__label">Listen</p>
         <h2 className="section__title">Hear the night</h2>
         <p className="section__copy">
-          Club pressure, private-party heat, and sunset warm-ups — press play before you enquire.
+          Club heat, wedding warm-ups, and private-party cumbia — press play before you enquire.
         </p>
         <div className="sets">
           {sets.map((set, i) => (
@@ -333,14 +337,14 @@ function App() {
         <p className="section__label">Services</p>
         <h2 className="section__title">Who it’s for</h2>
         <p className="section__copy">
-          Two lanes, one selector — promoters get the rider, planners get the timeline.
+          Clubs, family milestones, and brand nights — promoters get the rider, planners get the timeline.
         </p>
         <div className="services">
           <article className="service">
             <h3>Clubs</h3>
-            <p>60–120 minute sets of house, disco, and balearic pressure for rooms that run late.</p>
+            <p>60–120 minute Latin sets — bachata, salsa, cumbia, and tropical heat for rooms that run late.</p>
             <ul>
-              <li>Austin + regional travel</li>
+              <li>Houston + regional travel</li>
               <li>CDJ / USB ready</li>
               <li>EPK & tech rider on request</li>
             </ul>
@@ -350,11 +354,11 @@ function App() {
           </article>
           <article className="service">
             <h3>Private</h3>
-            <p>Weddings, birthdays, and lodge parties with clean edits and a read-the-room approach.</p>
+            <p>Weddings, quinceañeras, and birthday nights with requests honored and the floor always full.</p>
             <ul>
               <li>Must-play / do-not-play list</li>
               <li>Optional MC + wireless mic</li>
-              <li>Austin metro base rate</li>
+              <li>Houston metro base rate</li>
             </ul>
             <a className="service__link" href="#book">
               Book a private event
@@ -362,7 +366,7 @@ function App() {
           </article>
           <article className="service">
             <h3>Corporate</h3>
-            <p>Brand nights and company parties that stay sharp without killing the dancefloor.</p>
+            <p>Brand nights and company parties that stay festive without losing the Latin groove.</p>
             <ul>
               <li>Timeline + cue sheet</li>
               <li>Insured bookings available</li>
@@ -411,12 +415,12 @@ function App() {
         <div className="about">
           <div className="about__text">
             <p className="section__label">About</p>
-            <h2 className="section__title">Austin roots. Open-road records.</h2>
+            <h2 className="section__title">Houston heat. Latin forever.</h2>
             <p className="section__copy section__copy--tight">
-              DJ Cowboy digs for dusty disco, bass-heavy house, and late-night highway soul — the kind of records that turn a room into a convoy.
+              DJ Cowboy lives in the Latin catalog — bachata that slows the room down, salsa that snaps it back, cumbias that refuse to end, plus merengue, reggaetón, and the classics every tío requests.
             </p>
             <p className="section__copy">
-              From Stubb’s patio nights to private lodges outside the city, the brief is the same: keep people moving, never sand the edges off the music, and leave the timeline tighter than you found it.
+              From Houston club nights to quinceañeras and weddings across the metro, the brief is the same: keep every generation dancing, honor the requests, and leave the timeline tighter than you found it.
             </p>
             <div className="about__actions">
               <a className="btn btn--ink" href="/dj-cowboy-epk.txt" download>
@@ -501,10 +505,10 @@ function App() {
           ))}
         </div>
         <ul className="venues" aria-label="Selected rooms">
-          <li>Stubb&apos;s</li>
-          <li>The Premises</li>
-          <li>Brooklyn Mirage</li>
-          <li>Austin City Limits afters</li>
+          <li>Stereo Live</li>
+          <li>Warehouse Live</li>
+          <li>Houston Latin nights</li>
+          <li>Private estates · TX</li>
         </ul>
       </section>
 
@@ -634,6 +638,7 @@ function App() {
                   >
                     <option>Club</option>
                     <option>Wedding</option>
+                    <option>Quinceañera</option>
                     <option>Corporate</option>
                     <option>Private party</option>
                     <option>Other</option>
@@ -654,7 +659,7 @@ function App() {
                 City / venue
                 <input
                   name="city"
-                  placeholder="Austin, Stubb's, etc."
+                  placeholder="Houston, Stereo Live, etc."
                   value={booking.city}
                   onChange={(e) => updateField('city', e.target.value)}
                 />
@@ -663,7 +668,7 @@ function App() {
                 Vibe — 3 songs that define the night
                 <textarea
                   name="vibe"
-                  placeholder="Artists or tracks that set the tone"
+                  placeholder="Bachata, salsa, cumbia — artists or tracks that set the tone"
                   value={booking.vibe}
                   onChange={(e) => updateField('vibe', e.target.value)}
                 />
@@ -678,7 +683,7 @@ function App() {
       </section>
 
       <footer className="footer">
-        <p>© {new Date().getFullYear()} DJ Cowboy · Austin, TX</p>
+        <p>© {new Date().getFullYear()} DJ Cowboy · Houston, TX</p>
         <ul className="footer__socials">
           <li>
             <a href="https://soundcloud.com" target="_blank" rel="noreferrer">

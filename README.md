@@ -1,6 +1,6 @@
 # DJ Cowboy
 
-Austin-rooted house & disco DJ site for clubs, weddings, private events, and corporate nights.
+Houston-based Latin DJ site — bachata, salsa, cumbia, and all Latin sounds for clubs, weddings, quinceañeras, and private events.
 
 - **Live:** https://dj-cowboy.vercel.app
 - **GitHub:** https://github.com/hsalamanca/dj-cowboy
