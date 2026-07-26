@@ -1,15 +1,26 @@
 # DJ Cowboy
 
-Portfolio site for **DJ Cowboy**: landing page with sets, tour dates, and booking.
+Austin-rooted house & disco DJ site for clubs, weddings, private events, and corporate nights.
 
 - **Live:** https://dj-cowboy.vercel.app
 - **GitHub:** https://github.com/hsalamanca/dj-cowboy
+
+## What’s on the site
+
+- Hero + sticky book CTA
+- Listen (sets by context)
+- Services split (Clubs / Private / Corporate)
+- Packages with starting rates
+- About + EPK / tech rider downloads
+- Gallery, dates, testimonials
+- Booking process + FAQ
+- Enquiry form (mailto quote request)
 
 ## Stack
 
 - Vite + React + TypeScript
 - Framer Motion
-- Syne + Outfit (Google Fonts)
+- Big Shoulders Display + Karla
 - Vercel (auto-deploys from `main`)
 
 ## Develop
@@ -28,6 +39,6 @@ npm run preview
 
 ## Customize
 
-- Brand copy and dates: `src/App.tsx`
-- Colors / type: CSS variables in `src/index.css`
-- Hero image: Unsplash URL in the hero `<img>` in `src/App.tsx`
+- Copy, packages, FAQs, dates: `src/App.tsx`
+- Visual system: `src/index.css`, `src/App.css`
+- EPK / rider: `public/dj-cowboy-epk.txt`, `public/tech-rider.txt`
