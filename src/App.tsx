@@ -23,7 +23,7 @@ const sets = [
 const dates = [
   {
     when: 'Aug 08',
-    venue: 'Stubb\'s',
+    venue: "Stubb's",
     detail: 'All-night outdoor set',
     city: 'Austin',
   },
@@ -46,7 +46,7 @@ const fadeUp = {
   show: (delay = 0) => ({
     opacity: 1,
     y: 0,
-    transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] as const, delay },
+    transition: { duration: 0.75, ease: [0.22, 1, 0.36, 1] as const, delay },
   }),
 }
 
@@ -56,8 +56,8 @@ function App() {
     target: heroRef,
     offset: ['start start', 'end start'],
   })
-  const imageY = useTransform(scrollYProgress, [0, 1], ['0%', '18%'])
-  const imageScale = useTransform(scrollYProgress, [0, 1], [1.06, 1.18])
+  const imageY = useTransform(scrollYProgress, [0, 1], ['0%', '14%'])
+  const imageScale = useTransform(scrollYProgress, [0, 1], [1.04, 1.14])
 
   return (
     <div className="site">
@@ -81,7 +81,7 @@ function App() {
       <header className="hero" id="top" ref={heroRef}>
         <div className="hero__media" aria-hidden="true">
           <motion.img
-            src="https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=2400&q=80"
+            src="https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?auto=format&fit=crop&w=2400&q=80"
             alt=""
             style={{ y: imageY, scale: imageScale }}
           />
@@ -89,20 +89,34 @@ function App() {
         </div>
 
         <div className="hero__content">
-          <motion.h1
-            className="hero__brand"
+          <motion.p
+            className="hero__tag"
             initial="hidden"
             animate="show"
             custom={0.05}
             variants={fadeUp}
           >
+            DJ
+          </motion.p>
+          <motion.h1
+            className="hero__brand"
+            initial={{ opacity: 0, y: 40, letterSpacing: '0.18em' }}
+            animate={{ opacity: 1, y: 0, letterSpacing: '0.01em' }}
+            transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
+          >
             Cowboy
           </motion.h1>
+          <motion.div
+            className="hero__rule"
+            initial={{ scaleX: 0 }}
+            animate={{ scaleX: 1 }}
+            transition={{ duration: 0.7, delay: 0.35, ease: [0.22, 1, 0.36, 1] }}
+          />
           <motion.p
             className="hero__headline"
             initial="hidden"
             animate="show"
-            custom={0.2}
+            custom={0.4}
             variants={fadeUp}
           >
             Outlaw hours. Open range.
@@ -111,26 +125,19 @@ function App() {
             className="hero__lede"
             initial="hidden"
             animate="show"
-            custom={0.32}
+            custom={0.5}
             variants={fadeUp}
           >
-            DJ Cowboy rides bass-heavy house, dusty disco, and late-night country-club heat until the sun comes up.
+            Bass-heavy house, dusty disco, and road-trip heat until the sun comes up.
           </motion.p>
           <motion.div
             className="hero__ctas"
             initial="hidden"
             animate="show"
-            custom={0.45}
+            custom={0.6}
             variants={fadeUp}
           >
             <a className="btn btn--primary" href="#sound">
-              <span className="eq" aria-hidden="true">
-                <span />
-                <span />
-                <span />
-                <span />
-                <span />
-              </span>
               Listen
             </a>
             <a className="btn btn--ghost" href="#booking">
@@ -168,7 +175,7 @@ function App() {
           custom={0.12}
           variants={fadeUp}
         >
-          Peak-time selections built for dusty floors and long transitions.
+          Peak-time selections for dusty floors and long drives.
         </motion.p>
         <div className="sets">
           {sets.map((set, i) => (
@@ -221,7 +228,7 @@ function App() {
           custom={0.12}
           variants={fadeUp}
         >
-          Upcoming barn parties, club nights, and festival stages.
+          Barn parties, club nights, and festival stages.
         </motion.p>
         <div className="dates">
           {dates.map((date, i) => (
@@ -265,7 +272,7 @@ function App() {
             custom={0.15}
             variants={fadeUp}
           >
-            Club residencies, festival stages, and private rooms. Send dates, city, and format.
+            Residencies, festivals, and private rooms. Send dates, city, and format.
           </motion.p>
           <motion.a
             className="booking__email"
